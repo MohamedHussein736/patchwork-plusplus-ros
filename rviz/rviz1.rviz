@@ -5,6 +5,8 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
+        - /nonground1/Topic1
+        - /ground1/Topic1
         - /input1/Topic1
       Splitter Ratio: 0.5
     Tree Height: 419
@@ -130,9 +132,9 @@ Visualization Manager:
       Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 1681
+      Max Intensity: 1683
       Min Color: 0; 0; 0
-      Min Intensity: 3
+      Min Intensity: 4
       Name: input
       Position Transformer: XYZ
       Selectable: true
@@ -152,7 +154,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: lexus3/os_center_a
+    Fixed Frame: lexus3/os_center_a_laser_data_frame
     Frame Rate: 30
   Name: root
   Tools:
@@ -195,7 +197,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/ThirdPersonFollower
-      Distance: 103.528564453125
+      Distance: 52.79143142700195
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -210,10 +212,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.4797971546649933
+      Pitch: 0.6147969961166382
       Target Frame: <Fixed Frame>
       Value: ThirdPersonFollower (rviz_default_plugins)
-      Yaw: 2.955385446548462
+      Yaw: 4.390388011932373
     Saved: ~
 Window Geometry:
   Displays:
@@ -231,5 +233,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1260
-  X: 434
-  Y: 97
+  X: 370
+  Y: 33

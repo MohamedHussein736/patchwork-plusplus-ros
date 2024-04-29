@@ -15,7 +15,8 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        DeclareLaunchArgument('cloud_topic', default_value="/kitti/point_cloud"),
+        DeclareLaunchArgument('cloud_topic', default_value="/kitti/point_cloud", description="a pointcloud topic to process",),
+        DeclareLaunchArgument('cloud_frame', default_value="lexus3/os_center_a_laser_data_frame", description="a pointcloud topic to process",),
         
         Node(
             package='patchworkpp',
@@ -23,8 +24,8 @@ def generate_launch_description():
             name='ground_segmentation',
             output='screen',
             parameters=[
-                {'cloud_topic': '/points'}, # Input pointcloud
-                {'frame_id': 'laser_data_frame'},
+                {'cloud_topic': LaunchConfiguration("cloud_topic")}, # Input pointcloud
+                {'frame_id': LaunchConfiguration("cloud_frame")},
                 {'sensor_height': 1.88},
                 {'num_iter': 3},             # Number of iterations for ground plane estimation using PCA.
                 {'num_lpr': 20},             # Maximum number of points to be selected as lowest points representative.
