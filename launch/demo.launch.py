@@ -15,14 +15,31 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        DeclareLaunchArgument('cloud_topic', default_value="/kitti/point_cloud"),
+        DeclareLaunchArgument('cloud_topic', default_value="/kitti/point_cloud", description="a pointcloud topic to process",),
+        DeclareLaunchArgument('cloud_frame', default_value="lexus3/os_center_a_laser_data_frame", description="a pointcloud topic to process",),
         
         Node(
             package='patchworkpp',
             executable='demo',
             name='ground_segmentation',
             output='screen',
-            parameters=[config],
+            parameters=[
+                {'cloud_topic': LaunchConfiguration("cloud_topic")}, # Input pointcloud
+                {'frame_id': LaunchConfiguration("cloud_frame")},
+                {'sensor_height': 1.88},
+                {'num_iter': 3},             # Number of iterations for ground plane estimation using PCA.
+                {'num_lpr': 20},             # Maximum number of points to be selected as lowest points representative.
+                {'num_min_pts': 0},          # Minimum number of points to be estimated as ground plane in each patch.
+                {'th_seeds': 0.3},           # threshold for lowest point representatives using in initial seeds selection of ground points.
+                {'th_dist': 0.125},          # threshold for thickenss of ground.
+                {'th_seeds_v': 0.25},        # threshold for lowest point representatives using in initial seeds selection of vertical structural points.
+                {'th_dist_v': 0.9},          # threshold for thickenss of vertical structure.
+                {'max_r': 80.0},             # max_range of ground estimation area
+                {'min_r': 1.0},              # min_range of ground estimation area
+                {'uprightness_thr': 0.101},  # threshold of uprightness using in Ground Likelihood Estimation(GLE). Please refer paper for more information about GLE.
+                {'verbose': False},          # display verbose info
+                {'display_time': False},     # display running_time and pointcloud sizes
+            ],
             arguments=[LaunchConfiguration('cloud_topic')],
         ),
     ])

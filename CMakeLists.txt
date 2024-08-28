@@ -52,9 +52,16 @@ ${rclcpp_components_LIBRARIES})
 add_executable(demo src/demo.cpp)
 target_link_libraries(demo ${LIBS} ${PCL_LIBRARIES} )
 
+
 add_library(patchworkpp SHARED src/patchworkpp.cpp)
 target_compile_definitions(patchworkpp PUBLIC "PATCHWORKPP_COMPOSITION_BUILDING_DLL")
 target_link_libraries(patchworkpp ${LIBS})
+
+rclcpp_components_register_node(
+    patchworkpp
+    PLUGIN "patchworkpp::PatchworkppPointXYZI"
+    EXECUTABLE patchworkpp_comp_node
+)
 
 install(TARGETS
 patchworkpp
@@ -73,7 +80,7 @@ DESTINATION lib/${PROJECT_NAME})
 install(DIRECTORY include/${PROJECT_NAME}/
 DESTINATION include/${PROJECT_NAME})
 
-install(DIRECTORY launch config DESTINATION share/${PROJECT_NAME})
+install(DIRECTORY launch config rviz DESTINATION share/${PROJECT_NAME})
 
 ament_export_dependencies(ament_cmake)
 ament_export_dependencies(rclcpp)
